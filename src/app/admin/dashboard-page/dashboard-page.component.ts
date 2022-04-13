@@ -1,15 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {PostService} from "../../shared/post.service";
+import {Post} from "../../shared/interfaces";
+import {Subscription} from "rxjs";
+import {AlertService} from "../shared/services/alert.service";
 
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.scss']
 })
-export class DashboardPageComponent implements OnInit {
+export class DashboardPageComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  posts: Post[] = []
+  pSub: Subscription | any
+  dSub: Subscription | any
+  searchStr = ''
 
-  ngOnInit(): void {
+
+  constructor(private postService: PostService, private alert: AlertService) { }
+
+  ngOnInit() {
+    this.pSub = this.postService.getAll().subscribe(posts => {
+      this.posts = posts
+    })
   }
 
+  remove(id: string | any) {
+    this.dSub = this.postService.remove(id).subscribe(() => {
+      this.posts = this.posts.filter(post => post.id !== post.id)
+      this.alert.danger('Post Deleted!')
+    })
+  }
+
+  ngOnDestroy() {
+    if (this.pSub) {
+      this.pSub.unsubscribe()
+    }
+    if (this.dSub) {
+      this.dSub.unsubscribe()
+    }
+
+  }
 }

@@ -7,7 +7,7 @@ import {User} from "../../../shared/interfaces";
 
 
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AuthService {
   constructor(public http: HttpClient) {
   }

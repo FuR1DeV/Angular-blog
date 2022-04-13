@@ -3,7 +3,8 @@ import { initializeApp } from "firebase/app";
 
 export const environment: Environment = {
   production: true,
-  apiKey: 'AIzaSyDEW1ZOLiO9Vd8Pt6FufNu3A7QMD6KYlTs'
+  apiKey: 'AIzaSyDEW1ZOLiO9Vd8Pt6FufNu3A7QMD6KYlTs',
+  fBDbUrl: 'https://angular-blog-13f85-default-rtdb.firebaseio.com'
 };
 
 export const firebaseConfig = {
