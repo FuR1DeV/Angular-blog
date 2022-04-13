@@ -1,20 +1,22 @@
-<div class="post">
-  <div class="header">
-    <h1>Post title</h1>
+<div *ngIf="post$ | async as post; else loading">
+  <div class="post">
+    <div class="header">
+      <h1>{{ post.title }}</h1>
 
-    <button routerLink="/" class="btn btn-link">On main</button>
-  </div>
+      <button routerLink="/" class="btn btn-link btn-dark">On main</button>
+    </div>
 
-  <div class="info">
-    <strong>Author</strong>
-    <small>23.02.2022</small>
-  </div>
+    <div class="info">
+      <strong>{{ post.author }}</strong>
+      <small>{{ post.date | date:'medium':'null':'ru'}}</small>
+    </div>
 
-  <div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid architecto cum doloribus ducimus, eius eum ipsum iusto magnam necessitatibus, nobis odio provident quae recusandae soluta totam ullam vel voluptas voluptate voluptatem? Culpa dicta excepturi incidunt laudantium molestias non, perspiciatis quibusdam repudiandae saepe vitae. Dicta ex facilis fugiat laborum neque sapiente! Facilis nulla officia quae voluptatem?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid architecto cum doloribus ducimus, eius eum ipsum iusto magnam necessitatibus, nobis odio provident quae recusandae soluta totam ullam vel voluptas voluptate voluptatem? Culpa dicta excepturi incidunt laudantium molestias non, perspiciatis quibusdam repudiandae saepe vitae. Dicta ex facilis fugiat laborum neque sapiente! Facilis nulla officia quae voluptatem?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid architecto cum doloribus ducimus, eius eum ipsum iusto magnam necessitatibus, nobis odio provident quae recusandae soluta totam ullam vel voluptas voluptate voluptatem? Culpa dicta excepturi incidunt laudantium molestias non, perspiciatis quibusdam repudiandae saepe vitae. Dicta ex facilis fugiat laborum neque sapiente! Facilis nulla officia quae voluptatem?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid architecto cum doloribus ducimus, eius eum ipsum iusto magnam necessitatibus, nobis odio provident quae recusandae soluta totam ullam vel voluptas voluptate voluptatem? Culpa dicta excepturi incidunt laudantium molestias non, perspiciatis quibusdam repudiandae saepe vitae. Dicta ex facilis fugiat laborum neque sapiente! Facilis nulla officia quae voluptatem?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid architecto cum doloribus ducimus, eius eum ipsum iusto magnam necessitatibus, nobis odio provident quae recusandae soluta totam ullam vel voluptas voluptate voluptatem? Culpa dicta excepturi incidunt laudantium molestias non, perspiciatis quibusdam repudiandae saepe vitae. Dicta ex facilis fugiat laborum neque sapiente! Facilis nulla officia quae voluptatem?</p>
+    <div>
+      <quill-view-html [content]="post.text"></quill-view-html>
+    </div>
   </div>
 </div>
+
+<ng-template #loading>
+  <p class="text-center">Loading...</p>
+</ng-template>
